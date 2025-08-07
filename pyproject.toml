@@ -1,0 +1,19 @@
+[project]
+name = "sec-alert-bot"
+version = "0.1.0"
+description = "Security Advisory Discord Bot for multiple projects"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "discord-py>=2.5.2",
+    "feedparser>=6.0.11",
+    "html-to-markdown>=1.9.0",
+    "python-dotenv>=1.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "ruff>=0.12.7",
+]
