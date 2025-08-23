@@ -5,6 +5,7 @@ description = "Security Advisory Discord Bot for multiple projects"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "dateparser>=1.2.2",
     "discord-py>=2.5.2",
     "feedparser>=6.0.11",
     "html-to-markdown>=1.9.0",
