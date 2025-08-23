@@ -48,7 +48,7 @@ class FreeBSDDataSource(DataSource):
             entries.append(
                 Entry(
                     title=entry.title,
-                    content=entry.summary,
+                    content="",
                     link=entry.link,
                     pub_date=parse_date(entry.published),
                 )
