@@ -36,6 +36,12 @@ def convert_from_html(html: str) -> str:
 
 
 class DebianDSADataSource(DataSource):
+    """Debian Security Advisories data source.
+
+    This data sources retrieves information from Debian Security Advisories
+    RSS link for listing latest security announcements.
+    """
+
     def get_entries(self) -> list[Entry]:
         data = feedparser.parse("https://www.debian.org/security/dsa-long.rdf")
         entries = []
