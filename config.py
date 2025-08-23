@@ -15,7 +15,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Define enabled data sources for notices.
-DATA_SOURCES = ("DebianDSADataSource",)
+DATA_SOURCES = (
+    "FreeBSDDataSource",
+    "DebianDSADataSource",
+)
 
 # Define enabled bots for sending messages. No used for now
 BOTS = ("DiscordBot",)
