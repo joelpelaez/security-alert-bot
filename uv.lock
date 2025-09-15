@@ -130,15 +130,15 @@ wheels = [
 
 [[package]]
 name = "beautifulsoup4"
-version = "4.13.4"
+version = "4.13.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "soupsieve" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d8/e4/0c4c39e18fd76d6a628d4dd8da40543d136ce2d1752bd6eeeab0791f4d6b/beautifulsoup4-4.13.4.tar.gz", hash = "sha256:dbb3c4e1ceae6aefebdaf2423247260cd062430a410e38c66f2baa50a8437195", size = 621067, upload-time = "2025-04-15T17:05:13.836Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/2e/3e5079847e653b1f6dc647aa24549d68c6addb4c595cc0d902d1b19308ad/beautifulsoup4-4.13.5.tar.gz", hash = "sha256:5e70131382930e7c3de33450a2f54a63d5e4b19386eab43a5b34d594268f3695", size = 622954, upload-time = "2025-08-24T14:06:13.168Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/50/cd/30110dc0ffcf3b131156077b90e9f60ed75711223f306da4db08eff8403b/beautifulsoup4-4.13.4-py3-none-any.whl", hash = "sha256:9bbbb14bfde9d79f38b8cd5f8c7c85f4b8f2523190ebed90e950a8dea4cb1c4b", size = 187285, upload-time = "2025-04-15T17:05:12.221Z" },
+    { url = "https://files.pythonhosted.org/packages/04/eb/f4151e0c7377a6e08a38108609ba5cede57986802757848688aeedd1b9e8/beautifulsoup4-4.13.5-py3-none-any.whl", hash = "sha256:642085eaa22233aceadff9c69651bc51e8bf3f874fb6d7104ece2beb24b47c4a", size = 105113, upload-time = "2025-08-24T14:06:14.884Z" },
 ]
 
 [[package]]
@@ -279,15 +279,15 @@ wheels = [
 
 [[package]]
 name = "html-to-markdown"
-version = "1.9.0"
+version = "1.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "nh3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ca/88/5636b978592b2222473d6fdc3a395bc348d3f792307019ad9f57efe9604d/html_to_markdown-1.9.0.tar.gz", hash = "sha256:9cd066d33612a0fc00119f65bee7b5da98093c2fdd10493694fb08d15d1b2a2c", size = 38094, upload-time = "2025-07-29T15:40:00.28Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3a/ed/64340f8e71a0268c0c8c16f2c4db06dd5251ee40b9bd8dadd2a6b0bbe003/html_to_markdown-1.11.0.tar.gz", hash = "sha256:45a6b020e17ad98df1fcb2e12553a5897f78a2f6555b5a85756bde5942e14268", size = 35645, upload-time = "2025-09-13T10:02:05.61Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d4/e5/30ead7ebecc9dd1a5c91e85643064c5c255af44c19043fed85a3e2e251b4/html_to_markdown-1.9.0-py3-none-any.whl", hash = "sha256:00655a3b659440314a442d0467d185aa062103fd61564904b764fc692d91b8fc", size = 34471, upload-time = "2025-07-29T15:39:58.319Z" },
+    { url = "https://files.pythonhosted.org/packages/a5/4c/8ee387e8bdc72b7acfafdc8f8f7eb5861cb0318927ca42d2313379d99832/html_to_markdown-1.11.0-py3-none-any.whl", hash = "sha256:cccf632d1ee05b1f136bc3034219d4cc0e480a318cb6d7fbac4032afb2828fd1", size = 32155, upload-time = "2025-09-13T10:02:03.764Z" },
 ]
 
 [[package]]
