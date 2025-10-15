@@ -6,15 +6,15 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "dateparser>=1.2.2",
-    "discord-py>=2.5.2",
-    "feedparser>=6.0.11",
-    "html-to-markdown>=1.9.0",
+    "discord-py>=2.6.4",
+    "feedparser>=6.0.12",
+    "html-to-markdown>=2.2.0",
     "python-dotenv>=1.1.1",
 ]
 
 [dependency-groups]
 dev = [
-    "pre-commit>=4.2.0",
-    "pytest>=8.4.1",
-    "ruff>=0.12.7",
+    "pre-commit>=4.3.0",
+    "pytest>=8.4.2",
+    "ruff>=0.14.0",
 ]
