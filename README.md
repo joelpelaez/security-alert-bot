@@ -7,7 +7,7 @@ Discord bot for send notifications about security and erratas from multiple open
 Currently supporting:
 
  - Debian DSA
- - FreeBSD Security Advisories and Errata Notices (malfunctioning, see below)
+ - FreeBSD Security Advisories and Errata Notices (base OS)
  - FreeBSD VuXML (ports security announces)
 
 This code is dual licensed under the [BSD 2-Clause 'Simplified' License](LICENSE) and
@@ -25,5 +25,10 @@ notifications messages.
 ## Notes
 
 ### FreeBSD Security Advisories and Errata Notices
+
 Currently, the RSS source is not generating the correct data, it already was reported:
 [FreeBSD Bugzilla #288511](https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=288511).
+
+#### Update (2025-12-03)
+
+FreeBSD source was fixed on 2025-08-11 and it is available again.
