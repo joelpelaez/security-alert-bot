@@ -655,15 +655,15 @@ requires-dist = [
     { name = "dateparser", specifier = ">=1.2.2" },
     { name = "discord-py", specifier = ">=2.6.4" },
     { name = "feedparser", specifier = ">=6.0.12" },
-    { name = "html-to-markdown", specifier = ">=2.2.0" },
-    { name = "python-dotenv", specifier = ">=1.1.1" },
+    { name = "html-to-markdown", specifier = ">=2.6.5" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "pre-commit", specifier = ">=4.3.0" },
-    { name = "pytest", specifier = ">=8.4.2" },
-    { name = "ruff", specifier = ">=0.14.0" },
+    { name = "pre-commit", specifier = ">=4.4.0" },
+    { name = "pytest", specifier = ">=9.0.0" },
+    { name = "ruff", specifier = ">=0.14.4" },
 ]
 
 [[package]]
