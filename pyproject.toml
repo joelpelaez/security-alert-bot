@@ -8,13 +8,13 @@ dependencies = [
     "dateparser>=1.2.2",
     "discord-py>=2.6.4",
     "feedparser>=6.0.12",
-    "html-to-markdown>=2.6.5",
+    "html-to-markdown>=2.16.1",
     "python-dotenv>=1.2.1",
 ]
 
 [dependency-groups]
 dev = [
-    "pre-commit>=4.4.0",
-    "pytest>=9.0.0",
-    "ruff>=0.14.4",
+    "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.10",
 ]
