@@ -68,7 +68,7 @@ class DiscordBot(discord.Client, Bot):
     async def send_formatted_message(self, entry: Entry):
         channel = self.get_channel(self.channel_id)
         embed = discord.Embed(
-            title=entry.title, description=entry.content, url=entry.link, type="link"
+            title=entry.title, description=entry.content, url=entry.link, type="rich"
         )
         await channel.send(embed=embed)
 
