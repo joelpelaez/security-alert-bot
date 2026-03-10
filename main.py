@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # SPDX-License-Identifier: BSD-2-Clause or GPL-3.0-only
 #
-# Copyright (c) Joel Pelaez Jorge.
+# Copyright (c) 2026 Joel Pelaez Jorge.
 # All rights reserved.
 #
 # This source code is licensed under both the BSD-style license (found in the
