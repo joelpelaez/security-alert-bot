@@ -33,6 +33,8 @@ def parse_date(data: str | date | datetime) -> datetime | None:
         # Try using dateparser, if it fails returns None
         return dateparser.parse(data)
 
+    return None
+
 
 class FreeBSDDataSource(DataSource):
     """FreeBSD base and kernel security advertisement and errata notices data source.
