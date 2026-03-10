@@ -10,29 +10,19 @@
 
 import feedparser
 import html_to_markdown
-from bs4 import Tag
+from html_to_markdown import ConversionOptions
 
 from domain.datasource import DataSource
 from model.entry import Entry
 
 
-def process_a_tag(text: str, tag: Tag, **kwargs) -> str:
-    """Custom a tag processor
-
-    Custom processor for a tag, it removes the entry, because the link
-    is already included in the entry.
-    """
-    return ""
-
-
 def convert_from_html(html: str) -> str:
     """Convert an HTML string to Markdown
 
-    Convert the html entry to markdown compatible with Discord.
+    Convert the HTML entry to Markdown compatible with Discord.
     """
-    return html_to_markdown.convert_to_markdown(
-        html, custom_converters={"a": process_a_tag}
-    )
+    options = ConversionOptions()
+    return html_to_markdown.convert(html, options)
 
 
 class DebianDSADataSource(DataSource):
