@@ -15,6 +15,9 @@ __all__ = [
     "FreeBSDDataSource",
     "FreeBSDPortsDataSource",
     "RedHatSecurityErrataDataSource",
+    "AlmaLinuxSecurityAnnouncesV8DataSource",
+    "AlmaLinuxSecurityAnnouncesV9DataSource",
+    "AlmaLinuxSecurityAnnouncesV10DataSource",
 ]
 
 from model.entry import Entry
@@ -23,3 +26,8 @@ from .debian_dsa_ds import DebianDSADataSource
 from .freebsd_ds import FreeBSDDataSource
 from .freebsd_ports_ds import FreeBSDPortsDataSource
 from .rhsa_ds import RedHatSecurityErrataDataSource
+from .almalinux_ds import (
+    AlmaLinuxSecurityAnnouncesV8DataSource,
+    AlmaLinuxSecurityAnnouncesV9DataSource,
+    AlmaLinuxSecurityAnnouncesV10DataSource,
+)

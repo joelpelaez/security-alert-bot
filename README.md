@@ -6,6 +6,7 @@ Discord bot for send notifications about security and erratas from multiple open
 
 Currently supporting:
 
+ - AlmaLinux Errata Feed (8, 9 and 10)
  - Debian DSA
  - FreeBSD Security Advisories and Errata Notices (base OS)
  - FreeBSD VuXML (ports security announces)
