@@ -9,6 +9,7 @@ Currently supporting:
  - Debian DSA
  - FreeBSD Security Advisories and Errata Notices (base OS)
  - FreeBSD VuXML (ports security announces)
+ - Red Hat Security Errata (RHSA)
 
 This code is dual licensed under the [BSD 2-Clause 'Simplified' License](LICENSE) and
 [GNU General Public License v3.0](COPYING).

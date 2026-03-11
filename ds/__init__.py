@@ -14,6 +14,7 @@ __all__ = [
     "DebianDSADataSource",
     "FreeBSDDataSource",
     "FreeBSDPortsDataSource",
+    "RedHatSecurityErrataDataSource",
 ]
 
 from model.entry import Entry
@@ -21,3 +22,4 @@ from domain.datasource import DataSource
 from .debian_dsa_ds import DebianDSADataSource
 from .freebsd_ds import FreeBSDDataSource
 from .freebsd_ports_ds import FreeBSDPortsDataSource
+from .rhsa_ds import RedHatSecurityErrataDataSource
