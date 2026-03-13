@@ -34,7 +34,7 @@ BOTS = ("DiscordBot",)
 DB_PATH = os.getenv("DB_PATH")
 
 # Define wait time between messages from same notice fetch.
-MESSAGE_WAIT_TIME = os.environ.get("MESSAGE_WAIT_TIME", 10)
+MESSAGE_WAIT_TIME = int(os.environ.get("MESSAGE_WAIT_TIME", 10))
 
 # Define wait time between notices fetch to sources.
-NOTICES_FETCH_WAIT_TIME = os.environ.get("NOTICES_FETCH_WAIT_TIME", 600)
+NOTICES_FETCH_WAIT_TIME = int(os.environ.get("NOTICES_FETCH_WAIT_TIME", 600))
