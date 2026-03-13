@@ -16,7 +16,11 @@ from utils import struct_time_to_datetime
 
 
 class FreeBSDPortsDataSource(DataSource):
-    """Debian DSA notices data source"""
+    """FreeBSD ports VuXML data source.
+
+    This data source only apply for FreeBSD ports, not base OS.
+    For retrieve FreeBSD OS security announces, use FreeBSDDataSource instead.
+    """
 
     def get_entries(self) -> list[Entry]:
         feed = feedparser.parse("https://vuxml.freebsd.org/freebsd/rss.xml")
