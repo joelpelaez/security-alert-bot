@@ -16,6 +16,10 @@ load_dotenv()
 
 # Define enabled data sources for notices.
 DATA_SOURCES = (
+    "AlmaLinuxSecurityAnnouncesV10DataSource",
+    "AlmaLinuxSecurityAnnouncesV9DataSource",
+    "AlmaLinuxSecurityAnnouncesV8DataSource",
+    "RedHatSecurityErrataDataSource",
     "FreeBSDDataSource",
     "DebianDSADataSource",
 )
