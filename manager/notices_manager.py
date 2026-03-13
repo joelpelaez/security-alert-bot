@@ -67,6 +67,7 @@ class NoticesManager(Manager):
     async def _process_notices(self):
         for source in self._sources:
             notices = source.get_entries()
+            notices = sorted(notices, key=lambda n: n.pub_date, reverse=True)
 
             for notice in notices:
                 if not self._db.exists_announce(notice):
