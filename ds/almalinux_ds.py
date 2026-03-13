@@ -12,6 +12,7 @@ import feedparser
 
 from domain.datasource import DataSource
 from model.entry import Entry
+from utils import struct_time_to_datetime
 
 
 def _get_entries_with_version(release_version: int) -> list[Entry]:
@@ -27,7 +28,7 @@ def _get_entries_with_version(release_version: int) -> list[Entry]:
             Entry(
                 title=entry.title,
                 link=entry.link,
-                pub_date=entry.updated,
+                pub_date=struct_time_to_datetime(entry.published_parsed),
                 content=entry.summary,
             )
         )

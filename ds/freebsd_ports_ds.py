@@ -12,6 +12,7 @@ import feedparser
 
 from domain.datasource import DataSource
 from model.entry import Entry
+from utils import struct_time_to_datetime
 
 
 class FreeBSDPortsDataSource(DataSource):
@@ -26,7 +27,7 @@ class FreeBSDPortsDataSource(DataSource):
                     title=entry.title,
                     content="",
                     link=entry.link,
-                    pub_date=entry.published,
+                    pub_date=struct_time_to_datetime(entry.published_parsed),
                 )
             )
         return entries

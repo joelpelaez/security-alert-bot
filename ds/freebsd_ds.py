@@ -14,6 +14,7 @@ import dateparser
 
 from domain.datasource import DataSource
 from model.entry import Entry
+from utils import struct_time_to_datetime
 
 
 def parse_date(data: str | date | datetime) -> datetime | None:
@@ -52,7 +53,7 @@ class FreeBSDDataSource(DataSource):
                     title=entry.title,
                     content="",
                     link=entry.link,
-                    pub_date=parse_date(entry.published),
+                    pub_date=struct_time_to_datetime(entry.published_parsed),
                 )
             )
         return entries

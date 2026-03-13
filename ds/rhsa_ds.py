@@ -12,6 +12,7 @@ import feedparser
 
 from domain.datasource import DataSource
 from model.entry import Entry
+from utils import struct_time_to_datetime
 
 
 class RedHatSecurityErrataDataSource(DataSource):
@@ -31,7 +32,7 @@ class RedHatSecurityErrataDataSource(DataSource):
                 Entry(
                     title=entry.title,
                     link=entry.link,
-                    pub_date=entry.updated,
+                    pub_date=struct_time_to_datetime(entry.published_parsed),
                     content=entry.summary,
                 )
             )

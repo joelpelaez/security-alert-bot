@@ -14,6 +14,7 @@ from html_to_markdown import ConversionOptions
 
 from domain.datasource import DataSource
 from model.entry import Entry
+from utils import struct_time_to_datetime
 
 
 def convert_from_html(html: str) -> str:
@@ -40,7 +41,7 @@ class DebianDSADataSource(DataSource):
                 Entry(
                     title=entry.title,
                     link=entry.link,
-                    pub_date=entry.updated,
+                    pub_date=struct_time_to_datetime(entry.updated_parsed),
                     content=convert_from_html(entry.summary),
                 )
             )
