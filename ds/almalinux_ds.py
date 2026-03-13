@@ -9,21 +9,26 @@
 # You may select, at your option, one of the above-listed licenses.
 
 import feedparser
+from aiohttp import ClientSession
 
+from conn.http import get
 from domain.datasource import DataSource
 from model.entry import Entry
 from utils import struct_time_to_datetime
 
 
-def _get_entries_with_version(release_version: int) -> list[Entry]:
+async def _get_entries_with_version(
+    session: ClientSession, release_version: int
+) -> list[Entry]:
     """
     Retrieve the errata entries from a specific AlmaLinux release.
     """
-    data = feedparser.parse(
-        f"https://errata.almalinux.org/{release_version}/errata.rss"
+    data = await get(
+        session, f"https://errata.almalinux.org/{release_version}/errata.rss"
     )
+    feed = feedparser.parse(data)
     entries = []
-    for entry in data.entries:
+    for entry in feed.entries:
         entries.append(
             Entry(
                 title=entry.title,
@@ -51,8 +56,8 @@ class AlmaLinuxSecurityAnnouncesBase(DataSource):
 
     major_release: int
 
-    def get_entries(self) -> list[Entry]:
-        return _get_entries_with_version(self.major_release)
+    async def get_entries(self, session: ClientSession) -> list[Entry]:
+        return await _get_entries_with_version(session, self.major_release)
 
 
 class AlmaLinuxSecurityAnnouncesV8DataSource(AlmaLinuxSecurityAnnouncesBase):

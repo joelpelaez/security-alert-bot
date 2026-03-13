@@ -9,7 +9,9 @@
 # You may select, at your option, one of the above-listed licenses.
 
 import feedparser
+from aiohttp import ClientSession
 
+from conn.http import get
 from domain.datasource import DataSource
 from model.entry import Entry
 from utils import struct_time_to_datetime
@@ -22,12 +24,13 @@ class RedHatSecurityErrataDataSource(DataSource):
     RSS link for listing latest security announcements.
     """
 
-    def get_entries(self) -> list[Entry]:
-        data = feedparser.parse(
-            "https://security.access.redhat.com/data/meta/v1/rhsa.rss"
+    async def get_entries(self, session: ClientSession) -> list[Entry]:
+        data = await get(
+            session, "https://security.access.redhat.com/data/meta/v1/rhsa.rss"
         )
+        feed = feedparser.parse(data)
         entries = []
-        for entry in data.entries:
+        for entry in feed.entries:
             entries.append(
                 Entry(
                     title=entry.title,

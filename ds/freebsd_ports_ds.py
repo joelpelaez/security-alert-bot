@@ -9,7 +9,9 @@
 # You may select, at your option, one of the above-listed licenses.
 
 import feedparser
+from aiohttp import ClientSession
 
+from conn.http import get
 from domain.datasource import DataSource
 from model.entry import Entry
 from utils import struct_time_to_datetime
@@ -22,8 +24,9 @@ class FreeBSDPortsDataSource(DataSource):
     For retrieve FreeBSD OS security announces, use FreeBSDDataSource instead.
     """
 
-    def get_entries(self) -> list[Entry]:
-        feed = feedparser.parse("https://vuxml.freebsd.org/freebsd/rss.xml")
+    async def get_entries(self, session: ClientSession) -> list[Entry]:
+        data = await get(session, "https://vuxml.freebsd.org/freebsd/rss.xml")
+        feed = feedparser.parse(data)
         entries = []
         for entry in feed.entries:
             entries.append(

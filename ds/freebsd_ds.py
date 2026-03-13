@@ -11,7 +11,9 @@ from datetime import date, datetime
 
 import feedparser
 import dateparser
+from aiohttp import ClientSession
 
+from conn.http import get
 from domain.datasource import DataSource
 from model.entry import Entry
 from utils import struct_time_to_datetime
@@ -44,8 +46,9 @@ class FreeBSDDataSource(DataSource):
     advertisements and errata notices from the official RSS source.
     """
 
-    def get_entries(self) -> list[Entry]:
-        feed = feedparser.parse("https://www.freebsd.org/security/rss.xml")
+    async def get_entries(self, session: ClientSession) -> list[Entry]:
+        data = await get(session, "https://www.freebsd.org/security/rss.xml")
+        feed = feedparser.parse(data)
         entries = []
         for entry in feed.entries:
             entries.append(

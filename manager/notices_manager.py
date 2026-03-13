@@ -10,6 +10,9 @@
 
 import asyncio
 
+import aiohttp
+from aiohttp import ClientSession
+
 from settings import get_message_wait_time, get_notices_fetch_wait_time
 from db.notices import Notices
 from ds import DataSource
@@ -62,23 +65,27 @@ class NoticesManager(Manager):
 
     async def _loop(self):
         async with self._lock:
-            while self._running:
-                await self._process_notices()
+            async with aiohttp.ClientSession() as session:
+                while self._running:
+                    await self._process_notices(session)
 
-    async def _process_notices(self):
+    async def _process_notices(self, session: ClientSession):
         for source in self._sources:
-            notices = source.get_entries()
-            notices = sorted(notices, key=lambda n: n.pub_date, reverse=True)
-            notices = list(filter(lambda n: n.pub_date >= get_base_date(), notices))
-
-            for notice in notices:
-                if not self._db.exists_announce(notice):
-                    self._db.add_announce(notice)
-
-                    # Send it for all bots
-                    for bot in self._bots:
-                        await bot.send_formatted_message(notice)
-
-                    await asyncio.sleep(self._msg_wait_time)
+            await self._process_source(session, source)
 
         await asyncio.sleep(self._fetch_wait_time)
+
+    async def _process_source(self, session: ClientSession, source: DataSource):
+        notices = await source.get_entries(session)
+        notices = sorted(notices, key=lambda n: n.pub_date, reverse=True)
+        notices = list(filter(lambda n: n.pub_date >= get_base_date(), notices))
+
+        for notice in notices:
+            if not self._db.exists_announce(notice):
+                self._db.add_announce(notice)
+
+                # Send it for all bots
+                for bot in self._bots:
+                    await bot.send_formatted_message(notice)
+
+                await asyncio.sleep(self._msg_wait_time)

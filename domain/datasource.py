@@ -8,6 +8,8 @@
 # in the COPYING file in the root directory of this source tree).
 # You may select, at your option, one of the above-listed licenses.
 
+from aiohttp import ClientSession
+
 from model.entry import Entry
 
 
@@ -18,7 +20,7 @@ class DataSource:
     for multiple data sources and retrieving it in a specific structure.
     """
 
-    def get_entries(self) -> list[Entry]:
+    async def get_entries(self, session: ClientSession) -> list[Entry]:
         """Get all notices entries available from the data source
 
         This method obtains the available entries from the data source,

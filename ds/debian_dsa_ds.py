@@ -10,8 +10,10 @@
 
 import feedparser
 import html_to_markdown
+from aiohttp import ClientSession
 from html_to_markdown import ConversionOptions
 
+from conn.http import get
 from domain.datasource import DataSource
 from model.entry import Entry
 from utils import struct_time_to_datetime
@@ -33,10 +35,11 @@ class DebianDSADataSource(DataSource):
     RSS link for listing latest security announcements.
     """
 
-    def get_entries(self) -> list[Entry]:
-        data = feedparser.parse("https://www.debian.org/security/dsa-long.rdf")
+    async def get_entries(self, session: ClientSession) -> list[Entry]:
+        data = await get(session, "https://www.debian.org/security/dsa-long.rdf")
+        feed = feedparser.parse(data)
         entries = []
-        for entry in data.entries:
+        for entry in feed.entries:
             entries.append(
                 Entry(
                     title=entry.title,
