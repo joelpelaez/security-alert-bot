@@ -14,6 +14,7 @@ from settings import get_message_wait_time, get_notices_fetch_wait_time
 from db.notices import Notices
 from ds import DataSource
 from domain import Bot, Manager
+from settings.ds import get_base_date
 
 
 class NoticesManager(Manager):
@@ -68,6 +69,7 @@ class NoticesManager(Manager):
         for source in self._sources:
             notices = source.get_entries()
             notices = sorted(notices, key=lambda n: n.pub_date, reverse=True)
+            notices = list(filter(lambda n: n.pub_date >= get_base_date(), notices))
 
             for notice in notices:
                 if not self._db.exists_announce(notice):

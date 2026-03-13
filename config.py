@@ -24,6 +24,9 @@ DATA_SOURCES = (
     "DebianDSADataSource",
 )
 
+# Base datetime for entries filtering
+BASE_DATE = os.environ.get("BASE_DATE", "2026-01-01T00:00:00")
+
 # Define enabled bots for sending messages. No used for now
 BOTS = ("DiscordBot",)
 

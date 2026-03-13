@@ -7,11 +7,12 @@
 # LICENSE file in the root directory of this source tree) and the GPLv3 (found
 # in the COPYING file in the root directory of this source tree).
 # You may select, at your option, one of the above-listed licenses.
+from datetime import datetime
 
 import ds
 from domain import DataSource
 
-from config import DATA_SOURCES
+from config import DATA_SOURCES, BASE_DATE
 
 
 def get_data_sources() -> list[type[DataSource]]:
@@ -25,3 +26,15 @@ def get_data_sources() -> list[type[DataSource]]:
     """
     modules = [getattr(ds, ds_class) for ds_class in DATA_SOURCES]
     return modules
+
+
+def get_base_date() -> datetime:
+    """Get base date for notices fetching
+
+    Get the base date for filter old notices from data sources on first
+    data loading.
+
+    Returns:
+        datetime: Base date for notices fetching
+    """
+    return datetime.fromisoformat(BASE_DATE)
