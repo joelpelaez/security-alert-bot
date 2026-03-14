@@ -76,9 +76,12 @@ class NoticesManager(Manager):
     async def _process_notices(self, session: ClientSession):
         for source in self._sources:
             ds_name = source.__class__.__name__
-            _logger.info("%s: data source fetching started", ds_name)
-            await self._process_source(session, source)
-            _logger.info("%s: data source fetching ended", ds_name)
+            try:
+                _logger.info("%s: data source fetching started", ds_name)
+                await self._process_source(session, source)
+                _logger.info("%s: data source fetching ended", ds_name)
+            except Exception:
+                _logger.error("%s: data source fetching failed", ds_name, exc_info=True)
 
         await asyncio.sleep(self._fetch_wait_time)
 
