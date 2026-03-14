@@ -21,6 +21,9 @@ from domain import Bot, Manager
 from settings.ds import get_base_date
 
 
+_logger = logging.getLogger("manager.NoticesManager")
+
+
 class NoticesManager(Manager):
     """Manages notices data sources.
 
@@ -37,7 +40,6 @@ class NoticesManager(Manager):
     _lock: asyncio.Lock
     _msg_wait_time: int
     _fetch_wait_time: int
-    _logger: logging.Logger
 
     def __init__(self, sources: list[DataSource], db: Notices, bots: list[Bot]):
         self._sources = sources
@@ -47,7 +49,6 @@ class NoticesManager(Manager):
         self._fetch_wait_time = get_notices_fetch_wait_time()
         self._lock = asyncio.Lock()
         self._running = False
-        self._logger = logging.getLogger("manager.NoticesManager")
 
     async def lock(self):
         await self._lock.acquire()
@@ -75,9 +76,9 @@ class NoticesManager(Manager):
     async def _process_notices(self, session: ClientSession):
         for source in self._sources:
             ds_name = source.__class__.__name__
-            self._logger.info("%s: data source fetching started", ds_name)
+            _logger.info("%s: data source fetching started", ds_name)
             await self._process_source(session, source)
-            self._logger.info("%s: data source fetching ended", ds_name)
+            _logger.info("%s: data source fetching ended", ds_name)
 
         await asyncio.sleep(self._fetch_wait_time)
 
@@ -88,11 +89,11 @@ class NoticesManager(Manager):
         notices = sorted(notices, key=lambda n: n.pub_date, reverse=True)
         notices = list(filter(lambda n: n.pub_date >= get_base_date(), notices))
 
-        self._logger.info("%s: Found %d notices to process", ds_name, len(notices))
+        _logger.info("%s: Found %d notices to process", ds_name, len(notices))
 
         for notice in notices:
             if not self._db.exists_announce(notice):
-                self._logger.info(
+                _logger.info(
                     "%s: Notice '%s' is ready to be sent to bots",
                     ds_name,
                     notice.title,
