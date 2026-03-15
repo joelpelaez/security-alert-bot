@@ -16,13 +16,18 @@ class Manager:
     retrival.
     """
 
-    def on_ready(self):
+    async def on_ready(self):
         """
         Called when the bot is ready for send and receive messages.
         """
         pass
 
-    def on_terminate(self):
+    async def on_disconnect(self):
+        """
+        Called when the bot is disconnected from the server.
+        """
+
+    async def on_terminate(self):
         """
         Called when the bot has terminated.
         """
@@ -31,18 +36,5 @@ class Manager:
     async def start_async(self):
         """
         Async main loop for the manager, must be called on an async context.
-        """
-        pass
-
-    async def lock(self):
-        """
-        Allow to lock the manager waiting for the related bot to become ready.
-
-        The bot must call `on_ready()` for release the lock and start the manager's
-        main loop.
-
-        See also:
-            `on_ready`
-            `start_async`
         """
         pass

@@ -52,7 +52,13 @@ class DiscordBot(discord.Client, Bot):
         """Called when the bot is ready."""
         logger.info("%s has connected to Discord", self.user)
         if self._manager is not None:
-            self._manager.on_ready()
+            await self._manager.on_ready()
+
+    async def on_disconnect(self):
+        """Called when the bot is disconnected."""
+        logger.info("%s has disconnected from Discord", self.user)
+        if self._manager is not None:
+            await self._manager.on_disconnect()
 
     async def start_async(self):
         """Starts the bot on async mode.
@@ -63,7 +69,7 @@ class DiscordBot(discord.Client, Bot):
             await self.start(self.token, reconnect=True)
 
         # Terminate the manager
-        self._manager.on_terminate()
+        await self._manager.on_terminate()
 
     async def send_formatted_message(self, entry: Entry):
         channel = self.get_channel(self.channel_id)

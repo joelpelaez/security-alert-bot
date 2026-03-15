@@ -47,8 +47,6 @@ async def tasks():
         await bot.start_async()
 
     async def announces_runner():
-        # Start locked awaiting the bot be ready
-        await manager.lock()
         await manager.start_async()
 
     await asyncio.gather(bot_runner(), announces_runner())

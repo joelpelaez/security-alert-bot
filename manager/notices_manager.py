@@ -37,7 +37,7 @@ class NoticesManager(Manager):
     _db: Notices
     _bots: list[Bot]
     _running: bool
-    _lock: asyncio.Lock
+    _cond: asyncio.Condition
     _msg_wait_time: int
     _fetch_wait_time: int
 
@@ -47,17 +47,23 @@ class NoticesManager(Manager):
         self._bots = bots
         self._msg_wait_time = get_message_wait_time()
         self._fetch_wait_time = get_notices_fetch_wait_time()
-        self._lock = asyncio.Lock()
-        self._running = False
-
-    async def lock(self):
-        await self._lock.acquire()
-
-    def on_ready(self):
+        self._cond = asyncio.Condition()
+        self._is_ready = False
         self._running = True
-        self._lock.release()
 
-    def on_terminate(self):
+    async def on_ready(self):
+        self._is_ready = True
+
+        async with self._cond:
+            self._cond.notify()
+
+    async def on_disconnect(self):
+        self._is_ready = False
+
+        async with self._cond:
+            self._cond.notify()
+
+    async def on_terminate(self):
         self.stop()
 
     async def start_async(self):
@@ -68,9 +74,15 @@ class NoticesManager(Manager):
         pass
 
     async def _loop(self):
-        async with self._lock:
-            async with aiohttp.ClientSession() as session:
-                while self._running:
+        while self._running:
+            # Acquire semaphore and await if bot is not ready yet.
+            async with self._cond:
+                await self._cond.wait_for(lambda: self._is_ready)
+
+                if not self._is_ready:
+                    continue
+
+                async with aiohttp.ClientSession() as session:
                     await self._process_notices(session)
 
     async def _process_notices(self, session: ClientSession):
