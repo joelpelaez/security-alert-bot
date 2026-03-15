@@ -71,14 +71,49 @@ class DiscordBot(discord.Client, Bot):
         # Terminate the manager
         await self._manager.on_terminate()
 
-    async def send_formatted_message(self, entry: Entry):
-        channel = self.get_channel(self.channel_id)
-        embed = discord.Embed(
-            title=entry.title, description=entry.content, url=entry.link, type="rich"
-        )
-        await channel.send(embed=embed)
+    async def send_formatted_message(self, entry: Entry) -> bool:
+        try:
+            channel = self.get_channel(self.channel_id)
+            embed = discord.Embed(
+                title=entry.title,
+                description=entry.content,
+                url=entry.link,
+                type="rich",
+            )
+            message = await channel.send(embed=embed)
+            return message is not None
+        except TypeError:
+            logger.error("message structure error", exc_info=True)
+        except ValueError:
+            logger.error("message size error", exc_info=True)
+        except discord.NotFound:
+            logger.error("message was deleted recently.", exc_info=True)
+        except discord.Forbidden:
+            logger.error(
+                "target channel is not forbidden for sending messages", exc_info=True
+            )
+        except discord.HTTPException:
+            logger.error("general HTTP error while sending message", exc_info=True)
 
-    async def send_message(self, message):
-        channel = self.get_channel(self.channel_id)
-        if channel is not None:
-            await channel.send(message)
+        return False
+
+    async def send_message(self, message) -> bool:
+        try:
+            channel = self.get_channel(self.channel_id)
+            if channel is not None:
+                message = await channel.send(message)
+                return message is not None
+        except TypeError:
+            logger.error("message structure error", exc_info=True)
+        except ValueError:
+            logger.error("message size error", exc_info=True)
+        except discord.NotFound:
+            logger.error("message was deleted recently.", exc_info=True)
+        except discord.Forbidden:
+            logger.error(
+                "target channel is not forbidden for sending messages", exc_info=True
+            )
+        except discord.HTTPException:
+            logger.error("general HTTP error while sending message", exc_info=True)
+
+        return False

@@ -28,15 +28,27 @@ class Bot:
         """
         pass
 
-    async def send_formatted_message(self, entry: Entry):
+    async def send_formatted_message(self, entry: Entry) -> bool:
         """
         Send a formatted message using the bot with an Entry object
         for making a bot specific formatted message.
+
+        Args:
+            entry (Entry): An Entry object representing the message being sent.
+
+        Returns:
+            true if the message was sent successfully, false otherwise.
         """
         pass
 
-    async def send_message(self, message):
+    async def send_message(self, message: str) -> bool:
         """
         Send a plain text message using the boot.
+
+        Args:
+            message (str): The message to be sent.
+
+        Returns:
+            true if the message was sent successfully, false otherwise.
         """
         pass
