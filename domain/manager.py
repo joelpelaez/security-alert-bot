@@ -27,6 +27,11 @@ class Manager:
         Called when the bot is disconnected from the server.
         """
 
+    async def on_resumed(self):
+        """
+        Called when the bot is resumed from the server.
+        """
+
     async def on_terminate(self):
         """
         Called when the bot has terminated.

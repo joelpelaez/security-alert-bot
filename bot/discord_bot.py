@@ -60,6 +60,12 @@ class DiscordBot(discord.Client, Bot):
         if self._manager is not None:
             await self._manager.on_disconnect()
 
+    async def on_resumed(self):
+        """Called when the bot is resumed."""
+        logger.info("%s has been resumed from Discord", self.user)
+        if self._manager is not None:
+            await self._manager.on_resumed()
+
     async def start_async(self):
         """Starts the bot on async mode.
 

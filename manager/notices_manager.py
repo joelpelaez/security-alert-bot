@@ -63,6 +63,12 @@ class NoticesManager(Manager):
         async with self._cond:
             self._cond.notify()
 
+    async def on_resumed(self):
+        self._is_ready = True
+
+        async with self._cond:
+            self._cond.notify()
+
     async def on_terminate(self):
         self.stop()
 
