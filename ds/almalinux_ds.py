@@ -29,12 +29,14 @@ async def _get_entries_with_version(
     feed = feedparser.parse(data)
     entries = []
     for entry in feed.entries:
+        summary: str = entry.summary
+        summary = summary.replace("<pre>", "").replace("</pre>", "")
         entries.append(
             Entry(
                 title=entry.title,
                 link=entry.link,
                 pub_date=struct_time_to_datetime(entry.published_parsed),
-                content=entry.summary,
+                content=summary,
             )
         )
     return entries
