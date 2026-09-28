@@ -25,7 +25,12 @@ def convert_from_html(html: str) -> str:
     Convert the HTML entry to Markdown compatible with Discord.
     """
     options = ConversionOptions()
-    return html_to_markdown.convert(html, options)
+    content = html_to_markdown.convert(html, options).content
+
+    if content is None:
+        return ""
+
+    return content
 
 
 class DebianDSADataSource(DataSource):
