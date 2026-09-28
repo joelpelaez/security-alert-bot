@@ -85,11 +85,11 @@ class NoticesManager(Manager):
             async with self._cond:
                 await self._cond.wait_for(lambda: self._is_ready)
 
-                if not self._is_ready:
-                    continue
+            if not self._is_ready:
+                continue
 
-                async with aiohttp.ClientSession() as session:
-                    await self._process_notices(session)
+            async with aiohttp.ClientSession() as session:
+                await self._process_notices(session)
 
     async def _process_notices(self, session: ClientSession):
         for source in self._sources:
